@@ -1,0 +1,4 @@
+minify: true
+expand_buttons: true
+with_footer: false
+template_name: js_offline
