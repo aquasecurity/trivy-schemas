@@ -1,1 +1,5 @@
-<img width="816" alt="image" src="https://github.com/simar7/trivy-schemas/assets/1254783/eb51cd4f-13be-4061-b04f-fa64f360c8e5">
+## Trivy Schemas
+
+Trivy Schemas repo documents the various schemas that Trivy supports today.
+
+![ScreenRecording2024-01-17at14 50 32-ezgif com-video-to-gif-converter](https://github.com/simar7/trivy-schemas/assets/1254783/2e9dac4d-fc46-4d4f-991c-63e32aef5baf)
