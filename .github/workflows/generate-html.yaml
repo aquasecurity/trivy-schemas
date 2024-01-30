@@ -1,0 +1,33 @@
+name: Generate HTML
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate-html:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.x
+
+    - name: Install Dependencies
+      run: pip install json-schema-for-humans==0.47
+
+    - name: Clone Repository
+      run: make clone-repo
+
+    - name: Generate HTML
+      run: make generate-html
+
+    - name: Auto-commit changes
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: 'Auto-generate schemas'
