@@ -1,13 +1,12 @@
 SCHEMA_CONFIG_FILE=./config/config.yaml
-PATH_TO_SCHEMAS=./defsec/pkg/rego/schemas
 SCHEMAS=dockerfile kubernetes cloud rbac
 OUT_DIRECTORY=out
 
 generate-html:
-	@for schema in $(SCHEMAS); do \
-		mkdir -p out/$$schema; \
-		generate-schema-doc --config-file $(SCHEMA_CONFIG_FILE) $(PATH_TO_SCHEMAS)/$$schema.json $(OUT_DIRECTORY)/$$schema; \
+	@tmpdep=`mktemp -d`; \
+	trap 'rm -rf $$tmpdep' EXIT; \
+	for schema in $(SCHEMAS); do \
+		wget -q -O $$tmpdep/$$schema.json https://raw.githubusercontent.com/aquasecurity/trivy/main/pkg/iac/rego/schemas/$$schema.json; \
+		mkdir -p $(OUT_DIRECTORY)/$$schema; \
+		generate-schema-doc --config-file $(SCHEMA_CONFIG_FILE) $$tmpdep/$$schema.json $(OUT_DIRECTORY)/$$schema; \
 	done
-
-clone-repo:
-	git clone https://github.com/aquasecurity/defsec
