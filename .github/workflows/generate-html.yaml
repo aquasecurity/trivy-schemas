@@ -21,9 +21,6 @@ jobs:
     - name: Install Dependencies
       run: pip install json-schema-for-humans==0.47
 
-    - name: Clone Repository
-      run: make clone-repo
-
     - name: Generate HTML
       run: make generate-html
 
